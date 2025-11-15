@@ -116,6 +116,7 @@ dmypy.json
 *.crt
 *.key
 *.tfvars
+*tfstate
 *lock*
 .terraform/
 *tfstate
