@@ -1,15 +1,15 @@
-name: CI Pipeline
+name: CD Pipeline
 
 on:
 
   push:
     branches: [ main, development, master, production, staging ]
 env:
-  DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-  DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+  DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_HUB_ACCESS_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
   IMAGE_TAG: ${{ github.sha }}
   BRANCH_NAME: ${{ github.ref_name }}
-  REPO_NAME: ${{ github.repository.name }}
+  REPO_NAME: ${{ github.event.repository.name }}
 
 
 jobs:

@@ -118,3 +118,4 @@ dmypy.json
 *.tfvars
 *lock*
 .terraform/
+*tfstate
