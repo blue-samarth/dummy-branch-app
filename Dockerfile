@@ -3,6 +3,7 @@ FROM python:3.11-slim as builder
 WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
@@ -14,8 +15,17 @@ RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 
 FROM python:3.11-slim
 
+ARG FLASK_ENV=production
+ARG HEALTHCHECK_INTERVAL=30s
+ARG HEALTHCHECK_TIMEOUT=5s
+ARG HEALTHCHECK_RETRIES=3
+
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV FLASK_ENV=${FLASK_ENV}
+ENV HEALTHCHECK_INTERVAL=${HEALTHCHECK_INTERVAL}
+ENV HEALTHCHECK_TIMEOUT=${HEALTHCHECK_TIMEOUT}
+ENV HEALTHCHECK_RETRIES=${HEALTHCHECK_RETRIES}
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq5 \
